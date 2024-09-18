@@ -25,15 +25,6 @@ app.use("/api", rutas_articulo);
 //Rutas prueba hardcodeadas
 app.get("/probando", (req, res) => {
     console.log("Se ha ejecutado el endpoint probando"); 
-    // return res.status(200).send(`
-    //     <h1>Probando la ruta Node JS</h1>
-    //     <p> Creando Api Rest con node </p>
-    //     <ul>
-    //         <li>Master en React</li>
-    //         <li>Master en PHP</li>
-    //     </ul>
-    // `);
-    //Estrictamente con json, aunque puede ser .send().
     return res.status(200).json([{
         curso: "Master en React",
         autor: "MagusDeveloper",

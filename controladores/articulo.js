@@ -31,6 +31,7 @@ const crear = (req, res) => {
   try {
     //Le doy los datos a estas variables SI NO están vacios y su tamaño mínimo es de 5 caracteres, máximo 10
     let validar_titulo =
+      //Verifico que no este vacio el titulo, luego verifico el tamaño
       !validator.isEmpty(parametros.titulo) &&
       validator.isLength(parametros.titulo, { min: 5, max: undefined });
     let validar_contenido = !validator.isEmpty(parametros.contenido);
@@ -40,7 +41,7 @@ const crear = (req, res) => {
   } catch (error) {
     return res.status(400).json({
       status: "Error",
-      mensaje: "Faltan datos por enviar",
+      mensaje: "Faltan datos por enviar"
     });
   }
   //Crear el objeto a guardar
@@ -66,23 +67,7 @@ const crear = (req, res) => {
 
 //ENDPOINT READ
 const listar = (req, res) => {
-    //Forma 1
-    // let consulta = Articulo.find({},(error, articulos) => {
-        
-    // });
-    //Forma 2
-    // let consulta = Articulo.find({}).exec((error, articulos) => {
-    //     if(error || !articulos){
-    //         return res.status(404).json({
-    //             status: "error",
-    //             mensaje: "No se ha encontrado articulos"
-    //         });
-    //     }
-    //     return res.status(200).send({
-    //         status: "success",
-    //         articulos
-    //     });
-    // });
+    //Se guarda en una variable por si la ocupamos en algún punto
     let consulta = Articulo.find({}).exec().then((articulos) => {
         return res.status(200).send({
             status: "success",
