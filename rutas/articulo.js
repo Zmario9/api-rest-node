@@ -19,6 +19,9 @@ router.get('/curso', ArticuloController.curso);
 //RUTA CREATE DE ENDPOINT CREAR
 router.post('/crear', ArticuloController.crear);
 //RUTA READ DE ENDPOINT CONSEGUIR
-router.get('/listar', ArticuloController.listar);
+// router.get('/listar', ArticuloController.listar);
+//El "?" al final del parámetro hace que este parametro sea opcional.
+// router.get("/listar/:ultimos?", ArticuloController.listar);
+router.get('/listar/:ultimos?', ArticuloController.listar);
 
 module.exports = router;

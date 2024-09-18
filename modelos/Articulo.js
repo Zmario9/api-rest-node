@@ -8,7 +8,6 @@
   
 */
 const {Schema, model} = require('mongoose');
-const { __esModule } = require('validator/lib/isFloat');
 
 const ArticuloSchema = new Schema({
   titulo: {

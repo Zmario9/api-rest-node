@@ -41,7 +41,7 @@ const crear = (req, res) => {
   } catch (error) {
     return res.status(400).json({
       status: "Error",
-      mensaje: "Faltan datos por enviar"
+      mensaje: "Faltan datos por enviar",
     });
   }
   //Crear el objeto a guardar
@@ -67,24 +67,33 @@ const crear = (req, res) => {
 
 //ENDPOINT READ
 const listar = (req, res) => {
-    //Se guarda en una variable por si la ocupamos en algún punto
-    let consulta = Articulo.find({}).exec().then((articulos) => {
-        return res.status(200).send({
-            status: "success",
-            articulos
-        });
-    }).catch((error) => {
-        return res.status(400).json({
-            status: "error",
-            mensaje: "No se ha encontrado articulos",
-            error
-        });
+  //Se guarda en una variable por si la ocupamos en algún punto
+  let consulta = Articulo.find({})
+    //Limita el numero de resultados que quieres que se muestren
+    // consulta.limit(3);
+    //Con establecer -1 en fecha, filtramos del más reciente al más antiguo.
+    consulta.sort({fecha: -1})
+    .exec()
+    .then((articulos) => {
+      return res.status(200).send({
+        status: "success",
+        // parametro_url: req.params.ultimos,
+        contador: articulos.length,
+        articulos
+      });
+    })
+    .catch((error) => {
+      return res.status(400).json({
+        status: "error",
+        mensaje: "No se ha encontrado articulos",
+        error,
+      });
     });
-}
+};
 
 module.exports = {
   prueba,
   curso,
   crear,
-  listar
+  listar,
 };
