@@ -3,7 +3,6 @@ const express = require('express');
 //Importo el objeto de router para poder usar sus métodos.
 const router = express.Router();
 const ArticuloController = require('../controladores/Articulo');
-const { __esModule } = require('validator/lib/isFloat');
 //Otra manera, mismo resultado.
 // const Router = require("express");
 // const router = Router();
@@ -19,5 +18,7 @@ router.get('/curso', ArticuloController.curso);
 //Ruta util
 //RUTA CREATE DE ENDPOINT CREAR
 router.post('/crear', ArticuloController.crear);
+//RUTA READ DE ENDPOINT CONSEGUIR
+router.get('/listar', ArticuloController.listar);
 
 module.exports = router;

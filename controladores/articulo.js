@@ -1,23 +1,3 @@
-//crear un objeto para los métodos FORMA 1
-// const controlador = {
-//     propiedad: ()=>{
-
-//     }
-// }
-
-// module.exports = {
-//     nombre_de_metodo
-// }
-
-//Forma 2
-// const nombre_de_metodo = ()=>{
-
-// }
-
-//Programación funcional FORMA 2
-// function nombre_de_metodo(){
-
-// }
 const validator = require("validator");
 const Articulo = require("../modelos/Articulo");
 const prueba = (req, res) => {
@@ -43,6 +23,7 @@ const curso = (req, res) => {
   // return res.send("Hola mundo");
 };
 
+//ENDPOINT CREATE
 const crear = (req, res) => {
   //Recoger parámetros por post a guardar
   let parametros = req.body;
@@ -64,52 +45,61 @@ const crear = (req, res) => {
   }
   //Crear el objeto a guardar
   const articulo = new Articulo(parametros);
-
-  /*
-      Asignar valores a objeto basado en le modelo 
-      (que puede ser manual o automático) 
-    */
-  //    articulo.titulo = parametros.titulo;
-  //Guardar el artículo en la base de datos
-
-//   articulo.save((error, articuloGuardado) => {
-//     //Si hay error o no hay guardado, retorna error
-//     if (error || !articuloGuardado) {
-//       return res.status(400).json({
-//         status: "error",
-//         mensaje: "No se ha guardado el articulo",
-//       });
-//     }
-
-//     //Devolver resultado (osea la respuesta) si la hay
-//     return res.status(200).json({
-//         status: "success",
-//         articulo: articuloGuardado,
-//         mensaje: "Articulo creado con éxito!",
-//     });
-//   });
-articulo.save().then(articuloGuardado => {
-    return res.status(200).json({
+  //Guardar el articulo
+  articulo
+    .save()
+    .then((articuloGuardado) => {
+      return res.status(200).json({
         status: "success",
         articulo: articuloGuardado,
         mensaje: "Articulo creado con éxito!",
-    });
-})
-.catch(error => {
-    return res.status(400).json({
+      });
+    })
+    .catch((error) => {
+      return res.status(400).json({
         status: "error",
         mensaje: "No se ha guardado el articulo",
-        error 
+        error,
+      });
     });
-});
-// let output;
-// (async () => {
-//    output = await articulo.save();
-// })
 };
+
+//ENDPOINT READ
+const listar = (req, res) => {
+    //Forma 1
+    // let consulta = Articulo.find({},(error, articulos) => {
+        
+    // });
+    //Forma 2
+    // let consulta = Articulo.find({}).exec((error, articulos) => {
+    //     if(error || !articulos){
+    //         return res.status(404).json({
+    //             status: "error",
+    //             mensaje: "No se ha encontrado articulos"
+    //         });
+    //     }
+    //     return res.status(200).send({
+    //         status: "success",
+    //         articulos
+    //     });
+    // });
+    let consulta = Articulo.find({}).exec().then((articulos) => {
+        return res.status(200).send({
+            status: "success",
+            articulos
+        });
+    }).catch((error) => {
+        return res.status(400).json({
+            status: "error",
+            mensaje: "No se ha encontrado articulos",
+            error
+        });
+    });
+}
 
 module.exports = {
   prueba,
   curso,
   crear,
+  listar
 };
