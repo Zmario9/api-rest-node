@@ -77,7 +77,7 @@ const listar = (req, res) => {
     .then((articulos) => {
       return res.status(200).send({
         status: "success",
-        // parametro_url: req.params.ultimos,
+        parametro: req.params.ultimos,
         contador: articulos.length,
         articulos
       });

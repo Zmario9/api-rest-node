@@ -13,7 +13,7 @@ const ArticuloController = require('../controladores/Articulo');
   por defecto recibiendo el req y el res y retornando algo a la ruta.
 */
 router.get('/ruta-de-prueba', ArticuloController.prueba);
-router.get('/curso', ArticuloController.curso);
+// router.get('/curso', ArticuloController.curso);
 
 //Ruta util
 //RUTA CREATE DE ENDPOINT CREAR
@@ -21,7 +21,10 @@ router.post('/crear', ArticuloController.crear);
 //RUTA READ DE ENDPOINT CONSEGUIR
 // router.get('/listar', ArticuloController.listar);
 //El "?" al final del parámetro hace que este parametro sea opcional.
-// router.get("/listar/:ultimos?", ArticuloController.listar);
-router.get('/listar/:ultimos?', ArticuloController.listar);
+router.get("/listar/:ultimos?", ArticuloController.listar);
+// router.get('/listar/:ultimos?', (req, res)=>{ 
+//   const ultimos = req.params.ultimos || 'default value';
+//   ArticuloController.listar(req, res);
+// });
 
-module.exports = router;
+module.exports = router; 
