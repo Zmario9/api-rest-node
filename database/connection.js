@@ -1,9 +1,10 @@
 // import mongoose from 'mongoose';
-//
+
 const mongoose = require('mongoose');
 const connection = async() => {
     try{
-        mongoose.connect("mongodb://localhost:27017/mi_blog");
+        //Aquí hago el llamado a la variable de entorno del .env
+        mongoose.connect(process.env.MONGODB_URI);
         //Parametros dentro del objeto, solo en caso de aviso
         /*
           useUnifiedTopology: true,
