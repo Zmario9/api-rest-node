@@ -2,6 +2,10 @@
 const { connection } = require("./database/connection");
 const express = require("express");
 const cors = require("cors");
+//Agrego dotenv
+const dotenv = require("dotenv");
+//Se comienzan a leer las variables de entorno
+dotenv.config();
 
 //Inicializar app
 console.log("App de node arrancada");
