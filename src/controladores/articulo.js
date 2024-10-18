@@ -68,13 +68,10 @@ const crear = (req, res) => {
 //ENDPOINT READ
 const listar = (req, res) => {
   //Se guarda en una variable por si la ocupamos en algún punto
-  let consulta = Articulo.find({});
+  let consulta = Articulo.find({})
     //Limita el numero de resultados que quieres que se muestren
     // consulta.limit(3);
     //Con establecer -1 en fecha, filtramos del más reciente al más antiguo.
-    if (req.params.ultimos) {
-      consulta.limit(req.params.ultimos);
-    }
     consulta.sort({fecha: -1})
     .exec()
     .then((articulos) => {
